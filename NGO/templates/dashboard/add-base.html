@@ -1,0 +1,40 @@
+{% extends 'dashboard/base.html' %}
+{% block content %}
+{% load static %}
+{% block dashboardactive %} active {% endblock dashboardactive %}
+	<section id="content">
+		<!-- NAVBAR -->
+		<nav>
+			<i class='bx bx-menu' ></i>
+			<h6 class="nav-link">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h6>
+			<form action="#">
+				<div class="form-input">
+					<input type="search" placeholder="Search...">
+					<button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
+				</div>
+			</form>
+			<input type="checkbox" id="switch-mode" hidden>
+			<label for="switch-mode" class="switch-mode"></label>
+			{% if request.user %}
+			<a href="{% url 'dashboard' %}" class="profile">
+				<h5>Hi, {{request.user}}</h5>
+			</a>
+			{% endif %}
+		</nav>
+		<!-- NAVBAR -->
+
+		<!-- MAIN -->
+		<main>
+			<div class="table-data">
+				<div class="order">
+					{% block add %}
+                <!--add content here-->
+                    {% endblock %}
+                </div>
+            </div>
+		</main>
+		<!-- MAIN -->
+	</section>
+	<!-- CONTENT -->
+
+{% endblock %}

@@ -1,0 +1,39 @@
+
+{% extends 'dashboard/add-base.html' %}
+{% block add %}
+<div class="head">
+	<h3>Edit Blogs</h3>
+</div>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+      <div class="form-group">
+        <label for="main-title">Title</label>
+        <input type="text" class="form-control" id="main-title" placeholder="" name="title" value="{{blog_obj.title}}">
+          </div>
+        <div class="form-group">
+            <label for="about">Content</label>
+            <textarea class="form-control" id="about" rows="3" name="content" >{{blog_obj.content}}</textarea>
+          </div>
+          <div class="form-group">
+        <label for="designation">Author</label>
+        <input type="text" class="form-control" id="designation" placeholder="" name="author" value="{{blog_obj.author}}" readonly>
+          </div>
+        <div class="form-group">
+        <label for="timestamp">Timestamp</label>
+        <input type="text" class="form-control" id="timestamp" placeholder="" name="timestamp" value="{{blog_obj.timestamp}}" readonly>
+          </div>
+        <div class="form-group">
+            <label>Upload New Image</label>
+          <div class="form-group">
+            {% if blog_obj.image %}
+            <span><strong>{{blog_obj.image}}</strong></span>
+            {% endif %}
+          </div>
+            <input type="file" class="form-control-file" name="upload">
+        </div>
+        <div class="form-group text-center">
+            <button type="submit" class="btn btn-primary">SAVE</button>
+        </div>
+    </form>
+
+{% endblock %}

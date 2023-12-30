@@ -1,0 +1,151 @@
+{% extends 'dashboard/base.html' %}
+{% block content %}
+{% load static %}
+{% block dashboardactive %} active {% endblock dashboardactive %}
+	<section id="content">
+		<!-- NAVBAR -->
+		<nav>
+			<i class='bx bx-menu' ></i>
+			<h6 class="nav-link">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h6>
+			<form action="#">
+				<div class="form-input">
+					<input type="search" placeholder="Search...">
+					<button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
+				</div>
+			</form>
+			<input type="checkbox" id="switch-mode" hidden>
+			<label for="switch-mode" class="switch-mode"></label>
+			{% if request.user %}
+			<a href="{% url 'dashboard' %}" class="profile">
+				<h5>Hi, {{request.user}}</h5>
+			</a>
+			{% endif %}
+		</nav>
+		<!-- NAVBAR -->
+
+		<!-- MAIN -->
+		<main>
+			<div class="head-title">
+				<div class="left">
+					<h1>Dashboard</h1>
+				</div>
+				<a href="#" class="btn-download">
+					<i class='bx bxs-cloud-download' ></i>
+					<span class="text">Download PDF</span>
+				</a>
+			</div>
+
+			<ul class="box-info">
+				<li>
+					<i class='bx bxs-group' ></i>
+					<span class="text">
+						<h3>{{totla_number_of_donation}}</h3>
+						<p>Total Donars</p>
+					</span>
+				</li>
+				<li>
+					<i class='bx bxs-dollar-circle' ></i>
+					<span class="text">
+						<h3>&#8377;&nbsp;&nbsp;{{total_amount}}</h3>
+						<p>Total Donation</p>
+					</span>
+				</li>
+			</ul>
+
+			<div class="table-data">
+				<div class="order">
+					<div class="head">
+						<h3>Add Blog</h3>
+					</div>
+					 	<form method="post" enctype="multipart/form-data">
+							{% csrf_token %}
+						  <div class="form-group">
+							<label for="main-title">Title</label>
+							<input type="text" class="form-control" id="main-title" placeholder="" name="title" value="{{vision_obj.title}}">
+							  </div>
+							  <div class="form-group">
+							<label for="desc">Description</label>
+							<input type="text" class="form-control" id="desc" placeholder="" name="desc" value="{{vision_obj.desc}}">
+							  </div>
+						  <div class="form-group">
+								<label>Upload New Image</label>
+							  <div class="form-group">
+								{% if vision_obj.image1 %}
+								<span><strong>{{vision_obj.image1}}</strong></span>
+								{% endif %}
+							  </div>
+								<input type="file" class="form-control-file" name="upload">
+							</div>
+							<div class="form-group center">
+								<button type="submit" class="btn btn-primary">SAVE</button>
+							</div>
+						</form>
+					<div class="pt-10"></div>
+					<div class="container d-flex">
+						<div class="justify-content-center">
+						</div>
+					</div>
+				</div>
+				<div class="todo">
+					<div class="head">
+						<h3>Add New Data</h3>
+					</div>
+					<ul class="todo-list">
+						<li class="completed">
+							<a href="#">
+							<p>Add New Crousel</p>
+							</a>
+						</li>
+						<li class="completed">
+							<a href="#">
+							<p>Add New About</p>
+							</a>
+						</li>
+						<li class="completed">
+							<a href="#">
+							<p>Add New Mission</p>
+							</a>
+						</li>
+						<li class="completed">
+							<a href="#">
+							<p>Add New Vision</p>
+							</a>
+						</li>
+						<li class="completed">
+							<a href="#">
+							<p>Add New Service</p>
+							</a>
+						</li>
+						<li class="completed">
+							<a href="#">
+							<p>Add New Team</p>
+							</a>
+						</li>
+						<li class="completed">
+							<a href="#">
+							<p>Add New Gallery</p>
+							</a>
+						</li>
+						</a>
+						<li class="completed">
+							<a href="#">
+							<p>Add New Blog</p>
+							</a>
+						</li>
+						</a>
+						<li class="completed">
+							<a href="#">
+							<p>Add New Payment</p>
+							</a>
+						</li>
+						</a>
+					</ul>
+				</div>
+			</div>
+		</main>
+		<!-- MAIN -->
+	</section>
+	<!-- CONTENT -->
+
+{% endblock %}
+

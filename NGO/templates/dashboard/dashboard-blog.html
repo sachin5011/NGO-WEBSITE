@@ -1,0 +1,69 @@
+{% extends 'dashboard/base.html' %}
+{% block blogactive %} active {% endblock blogactive %}
+{% block content %}
+    <div id="content" class="p-4 p-md-5">
+        <h2 class="mb-4">
+            <div class="session-title row">
+                <h2>Edit Blog Page</h2>
+            </div>
+        </h2>
+        <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">id</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">Content</th>
+                  <th scope="col">Author</th>
+                  <th scope="col">Image</th>
+                  <th scope="col">Timestamp</th>
+                  <th scope="col">Edit / Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+               {% for obj in blog_obj %}
+                <tr>
+                  <th scope="row">{{forloop.counter}}</th>
+                  <td>{{obj.title | slice:':10'}}</td>
+                  <td>{{obj.content | slice:':20'}}</td>
+                  <td>{{obj.author}}</td>
+                  <td>{{obj.image}}</td>
+                  <td>{{obj.timestamp}}</td>
+                  <td>
+                      <a href="{% url 'blogedit' obj.id %}">
+                      <button type="submit" class="btn btn-warning" ><i class="fa-solid fa-pen-to-square"></i></button>
+                       </a>
+                       <a href="{% url 'blogdelete' obj.id %}">
+                           <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
+                       </a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+    </div>
+    <div class="container">
+        <nav aria-label="Page navigation example">
+			<ul class="pagination justify-content-center">
+				{% if blog_obj.has_previous %}
+				<li class="page-item enabled">
+				 <a class="page-link" href="?page=1">First</a>
+			    </li>
+			    <li class="page-item enabled">
+				 <a class="page-link" href="?page={{blog_obj.previous_page_number}}">Previous</a>
+			    </li>
+			  {% endif %}
+				{% for page in total_page %}
+			  <li class="page-item"><a class="page-link" href="?page={{page}}">{{page}}</a></li>
+				{% endfor %}
+			  {% if blog_obj.has_next %}
+				<li class="page-item">
+				<a class="page-link" href="?page={{last_page}}">Last</a>
+			  </li>
+			  <li class="page-item">
+				<a class="page-link" href="?page={{blog_obj.next_page_number}}">Next</a>
+			  </li>
+			  {% endif %}
+			</ul>
+		  </nav>
+    </div>
+{% endblock %}

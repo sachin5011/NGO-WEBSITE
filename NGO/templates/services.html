@@ -22,62 +22,42 @@
         <div class="container">
            
             <div class="event-ro row">
+                {% for item in service_obj %}
                 <div class="col-md-4 col-sm-6">
                     <div class="event-box">
-                        <img src="{% static 'assets/images/events/image_08.jpg' %}" alt="">
-                        <h4>Child Education in Africa</h4>
-                        
-                        <p class="raises"><span>Raised : $34,425</span> / $500,000 </p>
-                        <p class="desic">Lorem Ipsum is simply dummy text of the printing and typesetting industry.  Lorem Ipsum has been the industry's </p>
+                        <img src="{{item.image.url}}" alt="">
+                        <h4>{{item.title | safe}}</h4>
+                        <p class="desic">{{item.sub_title}}</p>
+                        <a href="{% url 'donateus' %}">
                         <button class="btn btn-success btn-sm">Donate Now</button>
+                        </a>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="event-box">
-                        <img src="{% static 'assets/images/events/image_06.jpg' %}" alt="">
-                        <h4>Child Education in Africa</h4>
-                        <p class="raises"><span>Raised : $34,425</span> / $500,000 </p>
-                        <p class="desic">Lorem Ipsum is simply dummy text of the printing and typesetting industry.  Lorem Ipsum has been the industry's </p>
-                        <button class="btn btn-success btn-sm">Donate Now</button>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="event-box">
-                        <img src="{% static 'assets/images/events/image_04.jpg' %}" alt="">
-                        <h4>Child Education in Africa</h4>
-                        <p class="raises"><span>Raised : $34,425</span> / $500,000 </p>
-                        <p class="desic">Lorem Ipsum is simply dummy text of the printing and typesetting industry.  Lorem Ipsum has been the industry's </p>
-                        <button class="btn btn-success btn-sm">Donate Now</button>
-                    </div>
-                </div>
-                 <div class="col-md-4 col-sm-6">
-                    <div class="event-box">
-                        <img src="{% static 'assets/images/events/image_05.jpg' %}" alt="">
-                        <h4>Child Education in Africa</h4>
-                        <p class="raises"><span>Raised : $34,425</span> / $500,000 </p>
-                        <p class="desic">Lorem Ipsum is simply dummy text of the printing and typesetting industry.  Lorem Ipsum has been the industry's </p>
-                        <button class="btn btn-success btn-sm">Donate Now</button>
-                    </div>
-                </div>
-                 <div class="col-md-4 col-sm-6">
-                    <div class="event-box">
-                        <img src="{% static 'assets/images/events/image_06.jpg' %}" alt="">
-                        <h4>Child Education in Africa</h4>
-                        <p class="raises"><span>Raised : $34,425</span> / $500,000 </p>
-                        <p class="desic">Lorem Ipsum is simply dummy text of the printing and typesetting industry.  Lorem Ipsum has been the industry's </p>
-                        <button class="btn btn-success btn-sm">Donate Now</button>
-                    </div>
-                </div>
-                 <div class="col-md-4 col-sm-6">
-                    <div class="event-box">
-                        <img src="{% static 'assets/images/events/image_07.jpg' %}" alt="">
-                        <h4>Child Education in Africa</h4>
-                        <p class="raises"><span>Raised : $34,425</span> / $500,000 </p>
-                        <p class="desic">Lorem Ipsum is simply dummy text of the printing and typesetting industry.  Lorem Ipsum has been the industry's </p>
-                        <button class="btn btn-success btn-sm">Donate Now</button>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
+        <nav aria-label="Page navigation example">
+			<ul class="pagination justify-content-center">
+				{% if service_obj.has_previous %}
+				<li class="page-item enabled">
+				 <a class="page-link" href="?page=1">First</a>
+			    </li>
+			    <li class="page-item enabled">
+				 <a class="page-link" href="?page={{service_obj.previous_page_number}}">Previous</a>
+			    </li>
+			  {% endif %}
+				{% for page in total_page %}
+			  <li class="page-item"><a class="page-link" href="?page={{page}}">{{page}}</a></li>
+				{% endfor %}
+			  {% if service_obj.has_next %}
+				<li class="page-item">
+				<a class="page-link" href="?page={{last_page}}">Last</a>
+			  </li>
+			  <li class="page-item">
+				<a class="page-link" href="?page={{service_obj.next_page_number}}">Next</a>
+			  </li>
+			  {% endif %}
+			</ul>
+		  </nav>
     </section>   
 {% endblock %}

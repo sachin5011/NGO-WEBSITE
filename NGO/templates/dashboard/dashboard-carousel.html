@@ -1,0 +1,69 @@
+{% extends 'dashboard/base.html' %}
+{% block carouselactive %} active {% endblock carouselactive %}
+{% block content %}
+
+
+    <div id="content" class="p-4 p-md-5">
+        <h2 class="mb-4">
+            <div class="session-title row">
+                <h2>Edit Carousel Images</h2>
+            </div>
+        </h2>
+        <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">id</th>
+                     <th scope="col">Title</th>
+                     <th scope="col">Sub Title</th>
+                     <th scope="col">Carousel Image</th>
+                     <th scope="col">Edit / Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+               {% for obj in carousel_obj %}
+                <tr>
+                  <th scope="row">{{forloop.counter}}</th>
+                    <td>{{obj.title}}</td>
+                    <td>{{obj.sub_title}}</td>
+                    <td>{{obj.carousel_img}}</td>
+                  <td>
+                      <a href="{% url 'homeedit' obj.id %}">
+                      <button type="submit" class="btn btn-warning" ><i class="fa-solid fa-pen-to-square"></i></button>
+                       </a>
+                       <a href="{% url 'homedelete' obj.id %}">
+                      <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
+                       </a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+    </div>
+     <div class="container">
+         <nav aria-label="Page navigation example">
+			<ul class="pagination justify-content-center">
+				{% if abt_obj.has_previous %}
+				<li class="page-item enabled">
+				 <a class="page-link" href="?page=1">First</a>
+			    </li>
+			    <li class="page-item enabled">
+				 <a class="page-link" href="?page={{abt_obj.previous_page_number}}">Previous</a>
+			    </li>
+			  {% endif %}
+				{% for page in total_page %}
+			  <li class="page-item"><a class="page-link" href="?page={{page}}">{{page}}</a></li>
+				{% endfor %}
+			  {% if abt_obj.has_next %}
+				<li class="page-item">
+				<a class="page-link" href="?page={{last_page}}">Last</a>
+			  </li>
+			  <li class="page-item">
+				<a class="page-link" href="?page={{abt_obj.next_page_number}}">Next</a>
+			  </li>
+			  {% endif %}
+			</ul>
+		  </nav>
+     </div>
+      </div>
+</div>
+{% endblock %}

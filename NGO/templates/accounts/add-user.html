@@ -1,0 +1,44 @@
+{% extends 'dashboard/base.html' %}
+{% block useractive %} active {% endblock useractive %}
+{% block content %}
+    <section class="container">
+    <div id="content" class="p-4 p-md-5">
+            <div class="p-6 card col-5 offset-3" style="width: 50%;">
+            <div class="p-4 card-body">
+              <form method="post">
+                {% csrf_token %}
+                <!-- Email input -->
+                <div class="form-outline mb-4">
+                  <input type="text" id="form2Example1" class="form-control" name="user"/>
+                  <label class="form-label" for="form2Example1">Username</label>
+                </div>
+
+                <!-- Password input -->
+                <div class="form-outline mb-4">
+                  <input type="password" id="form2Example2" class="form-control" name="new-pass"/>
+                  <label class="form-label" for="form2Example2">Password</label>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <input type="password" id="form2Example3" class="form-control" name="rpt-pass"/>
+                  <label class="form-label" for="form2Example3">Confirm Password</label>
+                </div>
+                  <div class="form-outline mb-4">
+                  <span>
+                      <label class="form-label" for="form2Example4">Give Admin Permissions : </label>
+                      <input type="checkbox" id="form2Example4" name="check-per"/>
+                  </span>
+                      <span>
+                      <label class="form-label" for="form2Example5">Give Staff Permissions : </label>
+                      <input type="checkbox" id="form2Example5" name="staff-per"/>
+                  </span>
+                </div>
+                <div class="text-center">
+                <button type="submit" class="btn btn-primary btn-block mb-4 p-10">Create User</button>
+                    </div>
+              </form>
+            </div>
+          </div>
+      </div>
+      </section>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="slider">
+        <!-- Set up your HTML -->
+        <div class="owl-carousel ">
+        {% for item in carousel_obj %}
+            <div class="slider-img">
+                <div class="item">
+                <div class="slider-img"><img src="{{item.carousel_img.url}}" alt=""></div>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 col-sm-12 col-xs-12">
+                            <div class="slider-captions ">
+                                <h1 class="slider-title">{{item.title}}</h1>
+                                <p class="slider-text hidden-xs">{{item.sub_title}}</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

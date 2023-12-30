@@ -21,111 +21,53 @@
 
     <section class="our-blog">
          	<div class="container">
-         		
         		<div class="blog-row row">
+        			<div class="blog-row row">
+                    {% for blog in blog_obj %}
         			<div class="col-md-4 col-sm-6">
         				<div class="single-blog">
         					<figure>
-        						<img src="{% static 'assets/images/events/image_01.jpg' %}" alt="">
+        						<img src="{{blog.image.url}}" alt="">
         					</figure>
         					<div class="blog-detail">
-        						<small>By Admin | August 10 2018</small>
-								<h4>Methods of Recuirtments</h4>
-								<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam justo neque, aliquet sit amet elementum vel, vehicula eget eros. Vivamus arcu metus, mattis sed sagittis at, sagittis quis neque. Praesent.</p>
+        						<small>By {{blog.author}} | {{blog.timestamp}}</small>
+								<h4>{{blog.title | safe}}</h4>
+								{{blog.content | safe | slice:':222'}}
+								<form method="post">
 								<div class="link">
-									<a href="">Read more </a><i class="fas fa-long-arrow-alt-right"></i>
+									<a type="submit" href="{% url 'blogdetails' blog.id %}">Read more </a><i class="fas fa-long-arrow-alt-right"></i>
 								</div>
+								</form>
         					</div>
-        					
-        					
         				</div>
         			</div>
-        			<div class="col-md-4 col-sm-6">
-        				<div class="single-blog">
-        					<figure>
-        						<img src="{% static 'assets/images/events/image_02.jpg' %}" alt="">
-        					</figure>
-        					<div class="blog-detail">
-        						<small>By Admin | August 10 2018</small>
-								<h4>Methods of Recuirtments</h4>
-								<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam justo neque, aliquet sit amet elementum vel, vehicula eget eros. Vivamus arcu metus, mattis sed sagittis at, sagittis quis neque. Praesent.</p>
-								<div class="link">
-									<a href="">Read more </a><i class="fas fa-long-arrow-alt-right"></i>
-								</div>
-        					</div>
-        					
-        					
-        				</div>
-        			</div>
-        			<div class="col-md-4 col-sm-6">
-        				<div class="single-blog">
-        					<figure>
-        						<img src="{% static 'assets/images/events/image_03.jpg' %}" alt="">
-        					</figure>
-        					<div class="blog-detail">
-        						<small>By Admin | August 10 2018</small>
-								<h4>Methods of Recuirtments</h4>
-								<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam justo neque, aliquet sit amet elementum vel, vehicula eget eros. Vivamus arcu metus, mattis sed sagittis at, sagittis quis neque. Praesent.</p>
-								<div class="link">
-									<a href="">Read more </a><i class="fas fa-long-arrow-alt-right"></i>
-								</div>
-        					</div>
-        					
-        					
-        				</div>
-        			</div>
-        			<div class="col-md-4 col-sm-6">
-        				<div class="single-blog">
-        					<figure>
-        						<img src="{% static 'assets/images/events/image_04.jpg' %}" alt="">
-        					</figure>
-        					<div class="blog-detail">
-        						<small>By Admin | August 10 2018</small>
-								<h4>Methods of Recuirtments</h4>
-								<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam justo neque, aliquet sit amet elementum vel, vehicula eget eros. Vivamus arcu metus, mattis sed sagittis at, sagittis quis neque. Praesent.</p>
-								<div class="link">
-									<a href="">Read more </a><i class="fas fa-long-arrow-alt-right"></i>
-								</div>
-        					</div>
-        					
-        					
-        				</div>
-        			</div>
-        			<div class="col-md-4 col-sm-6">
-        				<div class="single-blog">
-        					<figure>
-        						<img src="{% static 'assets/images/events/image_05.jpg' %}" alt="">
-        					</figure>
-        					<div class="blog-detail">
-        						<small>By Admin | August 10 2018</small>
-								<h4>Methods of Recuirtments</h4>
-								<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam justo neque, aliquet sit amet elementum vel, vehicula eget eros. Vivamus arcu metus, mattis sed sagittis at, sagittis quis neque. Praesent.</p>
-								<div class="link">
-									<a href="">Read more </a><i class="fas fa-long-arrow-alt-right"></i>
-								</div>
-        					</div>
-        					
-        					
-        				</div>
-        			</div>
-                    <div class="col-md-4 col-sm-6">
-        				<div class="single-blog">
-        					<figure>
-        						<img src="{% static 'assets/images/events/image_06.jpg' %}" alt="">
-        					</figure>
-        					<div class="blog-detail">
-        						<small>By Admin | August 10 2018</small>
-								<h4>Methods of Recuirtments</h4>
-								<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam justo neque, aliquet sit amet elementum vel, vehicula eget eros. Vivamus arcu metus, mattis sed sagittis at, sagittis quis neque. Praesent.</p>
-								<div class="link">
-									<a href="">Read more </a><i class="fas fa-long-arrow-alt-right"></i>
-								</div>
-        					</div>
-        					
-        					
-        				</div>
-        			</div>
+                    {% endfor %}
+        		</div>
         		</div>
          	</div>
+
+		<nav aria-label="Page navigation example">
+			<ul class="pagination justify-content-center">
+				{% if blog_obj.has_previous %}
+				<li class="page-item enabled">
+				 <a class="page-link" href="?page=1">First</a>
+			    </li>
+			    <li class="page-item enabled">
+				 <a class="page-link" href="?page={{blog_obj.previous_page_number}}">Previous</a>
+			    </li>
+			  {% endif %}
+				{% for page in total_page %}
+			  <li class="page-item"><a class="page-link" href="?page={{page}}">{{page}}</a></li>
+				{% endfor %}
+			  {% if blog_obj.has_next %}
+				<li class="page-item">
+				<a class="page-link" href="?page={{last_page}}">Last</a>
+			  </li>
+			  <li class="page-item">
+				<a class="page-link" href="?page={{blog_obj.next_page_number}}">Next</a>
+			  </li>
+			  {% endif %}
+			</ul>
+		  </nav>
          </section>
 {% endblock %}

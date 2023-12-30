@@ -1,0 +1,31 @@
+
+{% extends 'dashboard/add-base.html' %}
+{% block base %}
+<div class="head">
+	<h3>Edit Service Page</h3>
+</div>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+      <div class="form-group">
+        <label for="main-title">Title</label>
+        <input type="text" class="form-control" id="main-title" placeholder="" name="title" value="{{serv_obj.title}}">
+          </div>
+          <div class="form-group">
+        <label for="desc">Description</label>
+        <input type="text" class="form-control" id="desc" placeholder="" name="desc" value="{{serv_obj.sub_title}}">
+          </div>
+      <div class="form-group">
+            <label>Upload New Image</label>
+          <div class="form-group">
+            {% if serv_obj.image %}
+            <span><strong>{{serv_obj.image}}</strong></span>
+            {% endif %}
+          </div>
+            <input type="file" class="form-control-file" name="upload">
+        </div>
+        <div class="form-group text-center">
+            <button type="submit" class="btn btn-primary">SAVE</button>
+        </div>
+    </form>
+
+{% endblock %}

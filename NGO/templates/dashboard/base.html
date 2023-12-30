@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+	<!-- My CSS -->
+	<link rel="stylesheet" href="{% static 'dashboard/style.css' %}">
+
+	<title>dashboard</title>
+</head>
+<body>
+	<!-- SIDEBAR -->
+	<section id="sidebar">
+		<a href="{% url 'dashboard' %}" class="brand">
+			<i class='bx bxs-smile'></i>
+			<span class="text">AdminHub</span>
+		</a>
+		<ul class="side-menu top">
+			<li class="{% block dashboardactive %} {% endblock dashboardactive %}">
+				<a href="{% url 'dashboard' %}">
+					<i class='bx bxs-dashboard' ></i>
+					<span class="text">Dashboard</span>
+				</a>
+			</li>
+			<li class="dropdown">
+				<a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+					<i class='bx bxs-add-to-queue'></i>
+					<span class="text">Add</span>
+				</a>
+
+				<ul class="dropdown-menu">
+					<li><a class="dropdown-item" href="{% url 'addcarousel' %}">Add New Carousel</a></li>
+					<li><a class="dropdown-item" href="{% url 'addabout' %}">Add New About</a></li>
+					<li><a class="dropdown-item" href="{% url 'addmission' %}">Add New Mission</a></li>
+					<li><a class="dropdown-item" href="{% url 'addvision' %}">Add New Vision</a></li>
+					<li><a class="dropdown-item" href="{% url 'addservice' %}">Add New Service</a></li>
+					<li><a class="dropdown-item" href="{% url 'addteam' %}">Add New Team</a></li>
+					<li><a class="dropdown-item" href="{% url 'addgallery' %}">Add New Gallery</a></li>
+					<li><a class="dropdown-item" href="{% url 'addblog' %}">Add New Blog</a></li>
+					<li><a class="dropdown-item" href="{% url 'addpayment' %}">Add New Payment</a></li>
+				</ul>
+			</li>
+			<li class="{% block carouselactive %} {% endblock carouselactive %}">
+				<a href="{% url 'dashboardhome' %}">
+					<i class='bx bxs-carousel' ></i>
+					<span class="text">Carousel Edit</span>
+				</a>
+			</li>
+			<li class="{% block galleryactive %} {% endblock galleryactive %}">
+				<a href="{% url 'dashboardgallery' %}">
+					<i class='bx bxs-edit-alt' ></i>
+					<span class="text">Gallery Edit</span>
+				</a>
+			</li>
+			<li class="{% block aboutactive %} {% endblock aboutactive %}">
+				<a href="{% url 'dashboardabout' %}">
+					<i class='bx bxs-edit-alt' ></i>
+					<span class="text">About Edit</span>
+				</a>
+			</li>
+			<li class="{% block missionactive %} {% endblock missionactive %}">
+				<a href="{% url 'dashboardmission' %}">
+					<i class='bx bxs-bullseye' ></i>
+					<span class="text">Mission Edit</span>
+				</a>
+			</li>
+			<li class="{% block visionactive %} {% endblock visionactive %}">
+				<a href="{% url 'dashboardvision' %}">
+					<i class='bx bxs-tv' ></i>
+					<span class="text">Vision Edit</span>
+				</a>
+			</li>
+			<li class="{% block serviceactive %} {% endblock serviceactive %}">
+				<a href="{% url 'dashboardservice' %}">
+					<i class='bx bxs-briefcase-alt-2'></i>
+					<span class="text">Services Edit</span>
+				</a>
+			</li>
+			<li class="{% block teamactive %} {% endblock teamactive %}">
+				<a href="{% url 'dashboardteam' %}">
+					<i class='bx bxs-group' ></i>
+					<span class="text">Team Edit</span>
+				</a>
+			</li>
+			<li class="{% block blogactive %} {% endblock blogactive %}">
+				<a href="{% url 'dashboardblog' %}">
+					<i class='bx bxs-edit' ></i>
+					<span class="text">Blog Edit</span>
+				</a>
+			</li>
+			<li class="{% block alluseractive %} {% endblock alluseractive %}">
+				<a href="{% url 'allusers' %}">
+					<i class='bx bxs-edit' ></i>
+					<span class="text">All Users</span>
+				</a>
+			</li>
+			<li class="{% block useractive %} {% endblock useractive %}">
+				<a href="{% url 'adduser' %}">
+					<i class='bx bxs-edit' ></i>
+					<span class="text">Add User</span>
+				</a>
+			</li>
+		</ul>
+		<ul class="side-menu">
+			<li>
+				<a href="{% url 'password' %}" class="logout">
+					<i class="fa-solid fa-gear"></i>
+					<span class="text">Change Password</span>
+				</a>
+			</li>
+			<li>
+				<a href="{% url 'logout' %}" class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">Logout</span>
+				</a>
+			</li>
+
+		</ul>
+	</section>
+    {% block content %}
+<!--    CONTENT HERE-->
+    {% endblock %}
+    	<script src="{% static 'dashboard/script.js' %}"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+		<script src="https://kit.fontawesome.com/f2f7e86e1e.js" crossorigin="anonymous"></script>
+</body>
+</html>

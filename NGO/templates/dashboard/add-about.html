@@ -1,0 +1,22 @@
+{% extends 'dashboard/add-base.html' %}
+{% block add %}
+<div class="head">
+	<h3>Add About</h3>
+</div>
+ <form method="post">
+	{% csrf_token %}
+  <div class="form-group">
+	<label for="main-title">Title</label>
+	<input type="text" class="form-control" id="main-title" placeholder="" name="title">
+	  </div>
+	  <div class="form-group">
+		<label for="sub-title">Description</label>
+		<textarea class="form-control" id="sub-title" rows="3" name="sub_title" ></textarea>
+	  </div>
+	 <div class="h-100 d-flex align-items-center justify-content-center">
+	<div class="form-group center">
+		<button type="submit" class="btn btn-primary">SAVE</button>
+	</div>
+	 </div>
+</form>
+{% endblock %}

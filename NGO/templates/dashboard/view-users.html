@@ -1,0 +1,62 @@
+{% extends 'dashboard/base.html' %}
+{% block alluseractive %} active {% endblock alluseractive %}
+{% block content %}
+    <div id="content" class="p-4 p-md-5">
+        <h2 class="mb-4">
+            <div class="session-title row">
+                <h2>Edit Team Page</h2>
+            </div>
+        </h2>
+        <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">id</th>
+                  <th scope="col">Username</th>
+                  <th scope="col">Password</th>
+                  <th scope="col">Super User</th>
+                    <th scope="col">Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+               {% for obj in user_obj %}
+                <tr>
+                  <th scope="row">{{forloop.counter}}</th>
+                  <td>{{obj.username}}</td>
+                  <td>{{obj.password | slice:':20'}}</td>
+                  <td>{{obj.is_superuser}}</td>
+                  <td>
+                       <a href="{% url 'userdelete' obj.id %}">
+                      <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
+                       </a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+    </div>
+    <div class="container">
+        <nav aria-label="Page navigation example">
+			<ul class="pagination justify-content-center">
+				{% if team_obj.has_previous %}
+				<li class="page-item enabled">
+				 <a class="page-link" href="?page=1">First</a>
+			    </li>
+			    <li class="page-item enabled">
+				 <a class="page-link" href="?page={{team_obj.previous_page_number}}">Previous</a>
+			    </li>
+			  {% endif %}
+				{% for page in total_page %}
+			  <li class="page-item"><a class="page-link" href="?page={{page}}">{{page}}</a></li>
+				{% endfor %}
+			  {% if team_obj.has_next %}
+				<li class="page-item">
+				<a class="page-link" href="?page={{last_page}}">Last</a>
+			  </li>
+			  <li class="page-item">
+				<a class="page-link" href="?page={{team_obj.next_page_number}}">Next</a>
+			  </li>
+			  {% endif %}
+			</ul>
+		  </nav>
+    </div>
+{% endblock %}

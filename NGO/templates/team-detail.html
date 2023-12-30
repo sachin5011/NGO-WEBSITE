@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<section class="our-team team-11">
+            <div class="container">
+                <div class="session-title row">
+                      <h2>Meet our Team</h2>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce fringilla vel nisl a dictum. Donec ut est arcu. Donec hendrerit velit</p>
+                </div>
+                <div class="row team-row">
+                    {% for team in team_obj %}
+                    <div class="col-md-3 col-sm-6">
+						<form method="post">
+                        <a href="{% url 'teamdetailscard' team.id %}">
+                        <div class="single-usr">
+                            <img src="{{team.image.url}}" alt="">
+                            <div class="det-o">
+                                <h4>{{team.name | safe}}</h4>
+                                <i>{{team.designation}}</i>
+                            </div>
+                        </div>
+						</a>
+						</form>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+		  <nav aria-label="Page navigation example">
+			<ul class="pagination justify-content-center">
+				{% if team_obj.has_previous %}
+				<li class="page-item enabled">
+				 <a class="page-link" href="?page=1">First</a>
+			    </li>
+			    <li class="page-item enabled">
+				 <a class="page-link" href="?page={{team_obj.previous_page_number}}">Previous</a>
+			    </li>
+			  {% endif %}
+				{% for page in total_page %}
+			  <li class="page-item"><a class="page-link" href="?page={{page}}">{{page}}</a></li>
+				{% endfor %}
+			  {% if team_obj.has_next %}
+				<li class="page-item">
+				<a class="page-link" href="?page={{last_page}}">Last</a>
+			  </li>
+			  <li class="page-item">
+				<a class="page-link" href="?page={{team_obj.next_page_number}}">Next</a>
+			  </li>
+			  {% endif %}
+			</ul>
+		  </nav>
+</section>
+{% endblock %}

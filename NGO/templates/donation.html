@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block body %}
+<section class="events">
+    <div class="container-fluid">
+        <div class="session-title row">
+            <h2>Donate Us</h2>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card center">
+              <div class="card-body">
+                <h5 class="card-title">Bank Details</h5>
+                  <div>
+                    <label>Bank Name : </label>
+                </div>
+                  <div>
+                      <input class="col-md-6" type="text" value={{donate_obj.bank_name}} readonly>
+                  </div>
+                  <div>
+                    <label>Account Holder Name : </label>
+                </div>
+                  <div>
+                      <input class="col-md-6" type="text" value={{donate_obj.name}} readonly>
+                  </div>
+                <div>
+                    <label>Account Number : </label>
+                </div>
+                  <div>
+                      <input type="text" value={{donate_obj.account}} readonly class="col-md-6">
+                  </div>
+                  <div>
+                    <label>IFSC Code : </label>
+                </div>
+                  <div>
+                      <input class="col-md-6" type="text" value={{donate_obj.ifsc_code}} readonly>
+                  </div>
+                  <div>
+                    <label>UPI Id : </label>
+                </div>
+                  <div>
+                      <input class="col-md-6" type="text" value={{donate_obj.upi_id}} readonly>
+                  </div>
+              </div>
+                <form method="post">
+                    {% csrf_token %}
+                <div class="card-body">
+                    <h6>Please fill out payment details here</h6>
+                        <div>
+                      <label class="">Full Name</label>
+                            </div>
+                      <input type="text" class="col-md-6" placeholder="Your Full Name Here" name="name">
+                        <div>
+                      <label class="">Payment Mode</label>
+                            </div>
+                      <input type="text" class="col-md-6" placeholder="Bank Transfer/UPI/NEFT" name="pay">
+                        <div>
+                      <label class="">Transaction Id</label>
+                            </div>
+                      <input type="text" class="col-md-6" placeholder="TR2645478XX78" name="trans">
+                        <div>
+                      <label class="">Ammount</label>
+                            </div>
+                      <input type="text" class="col-md-6" placeholder="" name="amt">
+                    <div class="pt-3"></div>
+                    <div>
+                        <button type="submit" class="btn btn-primary">SAVE</button>
+                    </div>
+                </div>
+                </form>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card center">
+              <div class="card-body">
+                <h5 class="card-title">Scan Here</h5>
+                <div class="col-md-9 justify-content-center" >
+                    <img src={{donate_obj.qrcode.url}} alt="qrcode" class="">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

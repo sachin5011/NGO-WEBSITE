@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block body %}
+<section class="events">
+    <div class="card" style="width: 70rem;">
+        <div class="container">
+    <div class="row">
+      <div class="col-lg-12 p-2">
+        <br>
+          <div class="card" style="width: 69rem;">
+         <img src="{{blog_obj.image.url}}" class="img-fluid" alt="">
+          </div>
+          <br>
+          <br>
+          <h2>{{blog_obj.title}}</h2>
+          <br>
+          <h7 class="text-success">By {{blog_obj.author}} | {{blog_obj.timestamp}}</h7>
+          <br>
+          <br>
+        {{blog_obj.content | safe}}
+          <br>
+      </div>
+
+      <div style="text-align: left;" class="col-lg-5">
+
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
