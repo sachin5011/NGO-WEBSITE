@@ -42,9 +42,6 @@ def add_more_users(request):
         checked = True if checked else False
         staff = True if checked else False
 
-        print("-------")
-        print(checked)
-        print("-------")
 
         if username and new_pass and rpt_pass:
             user_obj = User.objects.filter(username=username)
